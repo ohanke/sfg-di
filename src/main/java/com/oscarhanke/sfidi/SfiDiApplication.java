@@ -1,6 +1,7 @@
 package com.oscarhanke.sfidi;
 
 import com.oscarhanke.sfidi.controllers.ConstructorInjectedController;
+import com.oscarhanke.sfidi.controllers.I18nController;
 import com.oscarhanke.sfidi.controllers.MyController;
 import com.oscarhanke.sfidi.controllers.PropertyInjectedController;
 import com.oscarhanke.sfidi.controllers.SetterInjectedController;
@@ -13,6 +14,9 @@ public class SfiDiApplication {
 
 	public static void main(String[] args) {
 		ApplicationContext ctx =  SpringApplication.run(SfiDiApplication.class, args);
+
+		I18nController i18nController = (I18nController) ctx.getBean("i18nController") ;
+		System.out.println(i18nController.sayHello());
 
 		MyController myController = (MyController) ctx.getBean("myController");
 		System.out.println(myController.sayHello());
