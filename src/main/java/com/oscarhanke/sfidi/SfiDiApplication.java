@@ -15,8 +15,7 @@ public class SfiDiApplication {
 		ApplicationContext ctx =  SpringApplication.run(SfiDiApplication.class, args);
 
 		MyController myController = (MyController) ctx.getBean("myController");
-		String greeting = myController.sayHello();
-		System.out.println(greeting);
+		System.out.println(myController.sayHello());
 
 		System.out.println(" --------- property");
 		PropertyInjectedController propertyInjectedController =
