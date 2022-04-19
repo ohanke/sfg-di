@@ -3,6 +3,7 @@ package com.oscarhanke.sfidi;
 import com.oscarhanke.sfidi.controllers.ConstructorInjectedController;
 import com.oscarhanke.sfidi.controllers.I18nController;
 import com.oscarhanke.sfidi.controllers.MyController;
+import com.oscarhanke.sfidi.controllers.PetController;
 import com.oscarhanke.sfidi.controllers.PropertyInjectedController;
 import com.oscarhanke.sfidi.controllers.SetterInjectedController;
 import org.springframework.boot.SpringApplication;
@@ -14,6 +15,10 @@ public class SfiDiApplication {
 
 	public static void main(String[] args) {
 		ApplicationContext ctx =  SpringApplication.run(SfiDiApplication.class, args);
+
+		PetController petController = ctx.getBean("petController", PetController.class);
+		System.out.println("--- The Best Pet is ---");
+		System.out.println(petController.whichPetIsTheBest());
 
 		I18nController i18nController = (I18nController) ctx.getBean("i18nController") ;
 		System.out.println(i18nController.sayHello());
