@@ -1,5 +1,7 @@
 package com.oscarhanke.sfidi.config;
 
+import com.oscarhanke.sfidi.repositories.EnglishGreetingRepository;
+import com.oscarhanke.sfidi.repositories.EnglishGreetingRepositoryImpl;
 import com.oscarhanke.sfidi.services.ConstructorGreetingService;
 import com.oscarhanke.sfidi.services.I18nEnglishGreetingService;
 import com.oscarhanke.sfidi.services.I18nSpanishGreetingService;
@@ -20,10 +22,15 @@ public class GreetingServiceConfig {
         return new I18nSpanishGreetingService();
     }
 
+    @Bean
+    EnglishGreetingRepository englishGreetingRepository(){
+        return new EnglishGreetingRepositoryImpl();
+    }
+
     @Profile("EN")
     @Bean
-    I18nEnglishGreetingService i18nService(){
-        return new I18nEnglishGreetingService();
+    I18nEnglishGreetingService i18nService(EnglishGreetingRepository englishGreetingRepository){
+        return new I18nEnglishGreetingService(englishGreetingRepository);
     }
 
     @Primary
