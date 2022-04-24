@@ -2,19 +2,39 @@ package com.oscarhanke.sfidi.config;
 
 import com.oscarhanke.sfidi.repositories.EnglishGreetingRepository;
 import com.oscarhanke.sfidi.repositories.EnglishGreetingRepositoryImpl;
-import com.oscarhanke.sfidi.services.ConstructorGreetingService;
 import com.oscarhanke.sfidi.services.I18nEnglishGreetingService;
 import com.oscarhanke.sfidi.services.I18nSpanishGreetingService;
 import com.oscarhanke.sfidi.services.PrimaryGreetingService;
 import com.oscarhanke.sfidi.services.PropertyInjectedGreetingService;
 import com.oscarhanke.sfidi.services.SetterInjectedGreetingService;
+import com.springframework.pets.PetService;
+import com.springframework.pets.PetServiceFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 
+@ImportResource("classpath:sfgdi-config.xml")
 @Configuration
 public class GreetingServiceConfig {
+
+    @Bean
+    PetServiceFactory petServiceFactory(){
+        return new PetServiceFactory();
+    }
+
+    @Profile({"dog", "default"})
+    @Bean
+    PetService dogPetService(PetServiceFactory petServiceFactory){
+        return petServiceFactory.getPetService("dog");
+    }
+
+    @Profile("cat")
+    @Bean
+    PetService catPetService(PetServiceFactory petServiceFactory){
+        return petServiceFactory.getPetService("cat");
+    }
 
     @Profile({"ES", "default"})
     @Bean("i18nService")
@@ -39,10 +59,10 @@ public class GreetingServiceConfig {
         return new PrimaryGreetingService();
     }
 
-    @Bean
-    ConstructorGreetingService constructorGreetingService(){
-        return new ConstructorGreetingService();
-    }
+//    @Bean
+//    ConstructorGreetingService constructorGreetingService(){
+//        return new ConstructorGreetingService();
+//    }
 
     @Bean
     PropertyInjectedGreetingService propertyInjectedGreetingService(){
