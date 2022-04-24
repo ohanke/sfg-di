@@ -1,6 +1,6 @@
 package com.oscarhanke.sfidi.controllers;
 
-import com.oscarhanke.sfidi.services.PetService;
+import com.springframework.pets.PetService;
 import org.springframework.stereotype.Controller;
 
 /**
