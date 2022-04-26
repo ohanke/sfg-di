@@ -1,5 +1,6 @@
 package com.oscarhanke.sfidi;
 
+import com.oscarhanke.sfidi.config.SfgConfiguration;
 import com.oscarhanke.sfidi.controllers.ConstructorInjectedController;
 import com.oscarhanke.sfidi.controllers.I18nController;
 import com.oscarhanke.sfidi.controllers.MyController;
@@ -60,6 +61,12 @@ public class SfiDiApplication {
 		System.out.println(fakeDataSource.getUsername());
 		System.out.println(fakeDataSource.getPassword());
 		System.out.println(fakeDataSource.getJdbcurl());
+
+		System.out.println("--------- Config Proprs Bean");
+		SfgConfiguration sfgConfiguration = ctx.getBean(SfgConfiguration.class);
+		System.out.println(sfgConfiguration.getUsername());
+		System.out.println(sfgConfiguration.getPassword());
+		System.out.println(sfgConfiguration.getJdbcurl());
 	}
 
 }
