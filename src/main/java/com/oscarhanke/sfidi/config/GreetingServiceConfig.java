@@ -1,5 +1,6 @@
 package com.oscarhanke.sfidi.config;
 
+import com.oscarhanke.sfidi.datasource.FakeDataSource;
 import com.oscarhanke.sfidi.repositories.EnglishGreetingRepository;
 import com.oscarhanke.sfidi.repositories.EnglishGreetingRepositoryImpl;
 import com.oscarhanke.sfidi.services.I18nEnglishGreetingService;
@@ -9,15 +10,29 @@ import com.oscarhanke.sfidi.services.PropertyInjectedGreetingService;
 import com.oscarhanke.sfidi.services.SetterInjectedGreetingService;
 import com.springframework.pets.PetService;
 import com.springframework.pets.PetServiceFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.PropertySource;
 
+@PropertySource("classpath:datasource.properties")
 @ImportResource("classpath:sfgdi-config.xml")
 @Configuration
 public class GreetingServiceConfig {
+
+    @Bean
+    FakeDataSource fakeDataSource(@Value("${guru.username}") String username,
+                                  @Value("${guru.password}") String password,
+                                  @Value("${guru.jdbcurl}") String jdbcurl){
+        FakeDataSource fakeDataSource = new FakeDataSource();
+        fakeDataSource.setUsername(username);
+        fakeDataSource.setPassword(password);
+        fakeDataSource.setJdbcurl(jdbcurl);
+        return fakeDataSource;
+    }
 
     @Bean
     PetServiceFactory petServiceFactory(){
