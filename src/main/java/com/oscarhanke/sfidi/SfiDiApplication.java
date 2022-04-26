@@ -1,6 +1,7 @@
 package com.oscarhanke.sfidi;
 
 import com.oscarhanke.sfidi.config.SfgConfiguration;
+import com.oscarhanke.sfidi.config.SfgConstructorConfig;
 import com.oscarhanke.sfidi.controllers.ConstructorInjectedController;
 import com.oscarhanke.sfidi.controllers.I18nController;
 import com.oscarhanke.sfidi.controllers.MyController;
@@ -67,6 +68,12 @@ public class SfiDiApplication {
 		System.out.println(sfgConfiguration.getUsername());
 		System.out.println(sfgConfiguration.getPassword());
 		System.out.println(sfgConfiguration.getJdbcurl());
+
+		System.out.println("--------------- Constructor Binding");
+		SfgConstructorConfig sfgConstructorConfig = ctx.getBean(SfgConstructorConfig.class);
+		System.out.println(sfgConstructorConfig.getUsername());
+		System.out.println(sfgConstructorConfig.getPassword());
+		System.out.println(sfgConstructorConfig.getJdbcurl());
 	}
 
 }
